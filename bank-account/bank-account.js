@@ -5,33 +5,59 @@
 
 export class BankAccount {
   constructor() {
-    this.saldo = 0
+    this.saldo = 0;
+    this.contaAberta = false;
   }
 
   open() {
-    return this.saldo
+    if (this.contaAberta == true) {
+      throw new ValueError();
+    } else {
+      this.contaAberta = true;
+      this.saldo = 0;
+    }
   }
 
   close() {
-
+    if (this.contaAberta == false) {
+      throw new ValueError();
+    } else this.contaAberta = false;
+    this.saldo = 0;
   }
 
-  deposit(params) {
-    this.saldo == params 
-
+  deposit(entrada) {
+    if (this.contaAberta == false || entrada < 0) {
+      throw new ValueError();
+    } else {
+      this.saldo += entrada;
+    }
   }
 
-  withdraw() {
+  withdraw(saida) {
+    if (this.contaAberta == true) {
+      let result = (this.saldo -= saida);
 
+      if (result < 0 || saida < 0) {
+        throw new ValueError();
+      } else {
+        this.saldo = result
+      }
+    } else {
+      throw new ValueError();
+    }
   }
 
   get balance() {
-    return this.saldo
+    if (this.contaAberta) {
+      return this.saldo;
+    } else {
+      throw new ValueError();
+    }
   }
 }
 
 export class ValueError extends Error {
   constructor() {
-    super('Bank account error');
+    super("Bank account error");
   }
 }
