@@ -3,16 +3,25 @@
 // convenience to get you started writing code faster.
 //
 
-export class Matrix {
-  constructor() {
-    throw new Error('Remove this statement and implement this function');
-  }
+export const Matrix = function (matrixString) {
+  this.matrix = [];
 
-  get rows() {
-    throw new Error('Remove this statement and implement this function');
-  }
+  matrixString.split("\n").forEach((rowString) => {
+    let rowList = [];
+    rowString
+      .split(" ")
+      .forEach((character) => rowList.push(parseInt(character)));
+    this.matrix.push(rowList);
+  });
 
-  get columns() {
-    throw new Error('Remove this statement and implement this function');
+  this.rows = this.matrix;
+
+  this.columns = [];
+  for (let i = 0; i < this.matrix[0].length; i++) {
+    let columnList = [];
+    for (let j = 0; j < this.matrix.length; j++) {
+      columnList.push(this.matrix[j][i]);
+    }
+    this.columns.push(columnList);
   }
-}
+};
