@@ -1,26 +1,22 @@
-//
-// This is only a SKELETON file for the 'Matrix' exercise. It's been provided as a
-// convenience to get you started writing code faster.
-//
-
 export class Matrix {
   constructor(str) {
-   this.matriz
-   this.result = []
-   this.str = str
+    this.rows = str.split("\n").map((p) => {
+      let test = p.split(" ");
+      let result = [];
 
-  }
+      for (let i = 0; i < test.length; i++) {
+        result.push(parseInt(test[i]));
+      }
+      return result;
+    });
 
-  get rows() {
-
-    
-   this.matriz = this.str.split('\n').map((p) => {
-    return p.replace(' ', '')
-  })
-
-  for (var i = 0; i < this.matriz.length; i++) {
-    this.result.push([...this.matriz[i]])
-  }
-
+    this.columns = [];
+    for (let i = 0; i < this.rows[0].length; i++) {
+      let columnList = [];
+      for (let j = 0; j < this.rows.length; j++) {
+        columnList.push(this.rows[j][i]);
+      }
+      this.columns.push(columnList);
+    }
   }
 }
